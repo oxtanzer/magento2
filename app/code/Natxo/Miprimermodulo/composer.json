@@ -1,0 +1,22 @@
+{
+    "name": "natxo/module-miprimermodulo",
+    "description": "Mi Primer modulo",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "natxoremirez@gmail.com",
+            "name": "Natxo Remirez"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Natxo\\Miprimermodulo\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
