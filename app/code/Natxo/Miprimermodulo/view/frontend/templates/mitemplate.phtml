@@ -1,1 +1,18 @@
-<p>Yujuuuuuuu ya estoy por aquí!</p>
+<?php 
+$categoryId = 14;
+echo "Productos con category Id: ".$categoryId."<br /><br />";
+$categoryProducts = $block->getCategoryProducts($categoryId);?>
+<ul>
+<?php foreach ($categoryProducts as $product) {?>
+<li>
+	 <p><a href="<?php echo $product->getProductUrl();?>" name="link_img" id="link_img"><img src="<?php echo $block->getImage($product, 'product_thumbnail_image')->getImageUrl(); ?>" name="product_image" id="product_image" /></a></p>
+	<p><a href="<?php echo $product->getProductUrl();?>" name="link_img" id="link_img"><?php echo $product->getName();?></a></p>
+	<p>Precio: <?php echo $product->getPriceInfo()->getPrice('final_price')->getAmount()->getBaseAmount();?></p>
+</li>
+<?php 
+/*	echo "<pre>";print_r($product->getData());     
+    echo "<br>";
+    echo $product->getName() . ' - ' . $product->getProductUrl() . '<br />';*/
+}
+?>
+</ul>

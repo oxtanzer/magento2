@@ -2,24 +2,41 @@
 namespace Natxo\Miprimermodulo\Block;
 class Miprimermodulo extends \Magento\Framework\View\Element\Template
 {    
-    protected $_productCollectionFactory;
+    protected $_categoryFactory;
+    protected $_imageBuilder;
         
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,        
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,        
-        array $data = []
+        \Magento\Catalog\Model\CategoryFactory $categoryFactory,
+        \Magento\Catalog\Block\Product\ImageBuilder $_imageBuilder
     )
     {    
-        $this->_productCollectionFactory = $productCollectionFactory;    
-        parent::__construct($context, $data);
+        parent::__construct($context);
+        $this->_categoryFactory = $categoryFactory;
+        $this->_imageBuilder=$_imageBuilder;
     }
     
-    public function getProductCollection()
+    public function getCategory($categoryId)
     {
-        $collection = $this->_productCollectionFactory->create();
-        $collection->addAttributeToSelect('*');
-        $collection->setPageSize(3); // fetching only 3 products
-        return $collection;
+        $category = $this->_categoryFactory->create();
+        $category->load($categoryId);
+        return $category;
+    }
+
+    public function getCategoryProducts($categoryId)
+    {
+
+        $products = $this->getCategory($categoryId)->getProductCollection()->setPageSize(3)->setCurPage(1);
+        $products->addAttributeToSelect('*');
+        return $products;
+    }
+
+    public function getImage($product, $imageId, $attributes = [])
+    {
+        return $this->_imageBuilder->setProduct($product)
+            ->setImageId($imageId)
+            ->setAttributes($attributes)
+            ->create();
     }
 }
 ?>
