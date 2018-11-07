@@ -28,6 +28,18 @@ class Miprimermodulo extends \Magento\Framework\View\Element\Template
 
         $products = $this->getCategory($categoryId)->getProductCollection()->setPageSize(3)->setCurPage(1);
         $products->addAttributeToSelect('*');
+        //$products->addFieldToFilter('name', array('like' => '%Beaumont%'));
+        //$products->addFieldToFilter('price', array('gt' => 70));
+        /*$products->addFieldToFilter(
+            array(
+                'name',
+                'price'
+            ),
+            array(
+                array('like' => '%Beaumont%'),
+                array('gt' => 70)
+            )
+        );*/
         return $products;
     }
 
