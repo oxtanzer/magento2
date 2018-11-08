@@ -5,7 +5,11 @@
     </head>
     <body>
     	<referenceContainer name="content">
-			<block class="Natxo\Miprimermodulo\Block\Miprimermodulo" name="mitemplate" template="mitemplate.phtml" />
+			<block class="Natxo\Miprimermodulo\Block\Miprimermodulo" name="mitemplate" template="mitemplate.phtml">
+				<arguments>
+            		<argument name="cat_id" xsi:type="string">14</argument>
+       			</arguments>
+       		</block>
 		</referenceContainer>
 	</body>
 </page>

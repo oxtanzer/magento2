@@ -8,10 +8,11 @@ class Miprimermodulo extends \Magento\Framework\View\Element\Template
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,        
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
-        \Magento\Catalog\Block\Product\ImageBuilder $_imageBuilder
+        \Magento\Catalog\Block\Product\ImageBuilder $_imageBuilder,
+        array $data = []
     )
     {    
-        parent::__construct($context);
+        parent::__construct($context, $data);
         $this->_categoryFactory = $categoryFactory;
         $this->_imageBuilder=$_imageBuilder;
     }
@@ -28,7 +29,7 @@ class Miprimermodulo extends \Magento\Framework\View\Element\Template
 
         $products = $this->getCategory($categoryId)->getProductCollection()->setPageSize(3)->setCurPage(1);
         $products->addAttributeToSelect('*');
-        //$products->addFieldToFilter('name', array('like' => '%Beaumont%'));
+        $products->addFieldToFilter('name', array('like' => '%Beaumont%'));
         //$products->addFieldToFilter('price', array('gt' => 70));
         /*$products->addFieldToFilter(
             array(

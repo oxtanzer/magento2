@@ -1,0 +1,43 @@
+<h2>Formulario de Contacto:</h2>
+<form name="form_contacto" method="POST" id="form_contacto">
+    <p>Nombre: <input name="firstname" type="text"></p>
+    <p>Apellidos: <input name="lastname" type="text"></p>
+    <p>Teléfono: <input name="phone" type="text"></p>
+    <p>Email: <input name="email" type="text"></p>
+    <p>Fecha: <input name="fecha" type="date"></p>
+    <p><input type="submit" value="Enviar"></p>
+</form>
+
+<script>
+require(['jquery'],function(){
+    jQuery(document).ready(function() {
+        jQuery("#form_contacto").submit(function(){
+
+            var firstnameValue = jQuery("input[name='firstname']").val();
+            var lastnameValue = jQuery("input[name='lastname']").val();
+            var phoneValue = jQuery("input[name='phone']").val();
+            var fechaValue = jQuery("input[name='fecha']").val();
+            var emailValue = jQuery("input[name='email']").val();
+
+            var url = "<?php echo $block->getBaseUrl().'miprimermodulo/contacto/enviar/' ?>";
+            jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: {firstname:firstnameValue, lastname:lastnameValue, phone:phoneValue, fecha:fechaValue, email:emailValue},
+            showLoader: true,
+            cache: false,
+            success: function(response){
+            	console.log(response);
+                /*jQuery("#form_contacto").html('<p>Datos recibidos:</p>');
+                jQuery("#form_contacto").append('<p>Nombre: '+response.firstname+'</p>');
+                jQuery("#form_contacto").append('<p>Apellidos: '+response.lastname+'</p>');
+                jQuery("#form_contacto").append('<p>Email: '+response.phone+'</p>');
+                jQuery("#form_contacto").append('<p>Teléfono: '+response.email+'</p>');
+                jQuery("#form_contacto").append('<p>Fecha: '+response.fecha+'</p>');*/
+            }
+        });
+        return false;
+        });
+    });
+});
+</script>
