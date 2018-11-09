@@ -9,9 +9,6 @@ class Enviar extends \Magento\Framework\App\Action\Action
 
     protected $resultPageFactory;
     protected $jsonHelper;
-    protected $_request;
-    //protected $_transportBuilder;
-    protected $_storeManager;
 
     /**
      * Constructor
@@ -22,18 +19,17 @@ class Enviar extends \Magento\Framework\App\Action\Action
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\App\Request\Http $request,
-        //\Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
-        array $data = []
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
     ) {
         $this->resultPageFactory = $resultPageFactory;
+        $this->request = $request;
         $this->jsonHelper = $jsonHelper;
-        $this->_request = $request;
-        //$this->_transportBuilder = $transportBuilder;
-        $this->_storeManager = $storeManager;
-        parent::__construct($context, $data);
+        $this->transportBuilder = $transportBuilder;
+        $this->storeManager = $storeManager;
+        parent::__construct($context);
     }
 
     /**
@@ -45,7 +41,7 @@ class Enviar extends \Magento\Framework\App\Action\Action
     {
         try {
             //$test = array('status' => 'success', 'message' => 'Agregado' );
-            $post = (array) $this->getRequest()->getPost();
+            $post = $this->request->getPostValue();
 
             if (!empty($post)) {
                 // Retrieve your form data
@@ -61,13 +57,21 @@ class Enviar extends \Magento\Framework\App\Action\Action
 
             }
 
-            $store = $this->_storeManager->getStore()->getId();
+            $form_contacto_datos = array(
+                'firstname' => 'Natxo',
+                'lastname' => '',
+                'phone' => '0000',
+                'email' => 'nremirez@theinit.com',
+                'fecha' => '10/10/2019'
+            );
 
-            $transport = $this->_transportBuilder->setTemplateIdentifier('miprimermodulo_test_template')
+            $store = $this->storeManager->getStore()->getId();
+
+            $transport = $this->transportBuilder->setTemplateIdentifier('miprimermodulo_test_template')
                 ->setTemplateOptions(['area' => 'frontend', 'store' => $store])
                 ->setTemplateVars(
                     [
-                        'store' => $this->_storeManager->getStore(),
+                        'store' => $this->storeManager->getStore(),
                     ]
                 )
                 ->setFrom('general')
@@ -80,7 +84,6 @@ class Enviar extends \Magento\Framework\App\Action\Action
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             return $this->jsonResponse($e->getMessage());
         } catch (\Exception $e) {
-            $this->logger->critical($e);
             return $this->jsonResponse($e->getMessage());
         }
     }

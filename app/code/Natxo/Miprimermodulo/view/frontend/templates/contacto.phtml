@@ -28,6 +28,7 @@ require(['jquery'],function(){
             cache: false,
             success: function(response){
             	console.log(response);
+            	jQuery("#form_contacto").html('<p>'+response+'</p>');
                 /*jQuery("#form_contacto").html('<p>Datos recibidos:</p>');
                 jQuery("#form_contacto").append('<p>Nombre: '+response.firstname+'</p>');
                 jQuery("#form_contacto").append('<p>Apellidos: '+response.lastname+'</p>');
