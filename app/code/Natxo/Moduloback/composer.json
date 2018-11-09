@@ -1,0 +1,22 @@
+{
+    "name": "natxo/module-moduloback",
+    "description": "Modulo Back",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Natxo\\Moduloback\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

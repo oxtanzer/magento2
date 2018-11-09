@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Natxo_Moduloback::first_level_demo"
+             title="Natxo"
+             module="Natxo_Moduloback"
+             sortOrder="9999"
+             resource="Magento_Backend::content"
+             parent="Magento_Backend::content" />
+ 
+        <add id="Natxo_Moduloback::second_level_demo"
+             title="Content"
+             module="Natxo_Moduloback"
+             sortOrder="0"
+             action="natxo_moduloback/index/index"
+             parent="Natxo_Moduloback::first_level_demo"
+             resource="Magento_Backend::content" />
+    </menu>
+</config>

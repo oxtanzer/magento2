@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="natxo_moduloback" frontName="natxo_moduloback">
+            <module name="Natxo_Moduloback"/>
+        </route>
+    </router>
+</config>
