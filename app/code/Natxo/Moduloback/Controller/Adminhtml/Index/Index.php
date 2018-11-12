@@ -1,27 +1,42 @@
 <?php
-
 namespace Natxo\Moduloback\Controller\Adminhtml\Index;
 
-class Index extends \Magento\Backend\App\Action
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\View\Result\PageFactory;
+
+
+class Index extends Action
 {
-	protected $resultPageFactory = false;
+    /**
+     * @var \Magento\Framework\View\Result\PageFactory
+     */
+    protected $resultPageFactory;
 
-	public function __construct(
-		\Magento\Backend\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $resultPageFactory
-	)
-	{
-		parent::__construct($context);
-		$this->resultPageFactory = $resultPageFactory;
-	}
+    /**
+     * @var \Magento\Backend\Model\View\Result\Page
+     */
+    protected $resultPage;
 
-	public function execute()
-	{
-		$resultPage = $this->resultPageFactory->create();
-		$resultPage->getConfig()->getTitle()->prepend((__('Moduloback')));
+    /**
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
+    public function __construct(
+        Context $context,
+        PageFactory $resultPageFactory
+    )
+    {
+        parent::__construct($context);
+        $this->resultPageFactory = $resultPageFactory;
+    }
 
-		return $resultPage;
-	}
-
-
+    public function execute()
+    {
+		
+		$this->resultPage = $this->resultPageFactory->create();  
+		$this->resultPage->setActiveMenu('Natxo_Index::index');
+		$this->resultPage ->getConfig()->getTitle()->set((__('Natxo Modulo Back')));
+		return $this->resultPage;
+    }
 }

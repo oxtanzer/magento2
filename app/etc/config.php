@@ -1,6 +1,7 @@
 <?php
 return [
     'modules' => [
+        'ADM_QuickDevBar' => 1,
         'Magento_Store' => 1,
         'Magento_Directory' => 1,
         'Magento_Eav' => 1,
@@ -143,6 +144,10 @@ return [
         'Dotdigitalgroup_Email' => 1,
         'Magento_WishlistAnalytics' => 1,
         'Magento_WishlistSampleData' => 1,
+        'Mageplaza_Core' => 1,
+        'Mageplaza_Smtp' => 1,
+        'Natxo_Miprimermodulo' => 1,
+        'Natxo_Moduloback' => 1,
         'Temando_Shipping' => 1,
         'Vertex_Tax' => 1
     ]
