@@ -25,7 +25,7 @@ class Save extends \Magento\Backend\App\Action
 						$result = $uploader->save($mediaDirectory->getAbsolutePath('natxo/moduloback/'));
 						unset($result['tmp_name']);
 						unset($result['path']);
-						$data['image'] = $result['file'];
+						$data['image'] = 'natxo/moduloback/'.$result['file'];
 				} catch (Exception $e) {
 					$data['image'] = $_FILES['image']['name'];
 				}
