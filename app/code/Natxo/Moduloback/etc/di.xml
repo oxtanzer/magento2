@@ -2,11 +2,11 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="natxo_moduloback_listing_data_source" xsi:type="string">Natxo\Moduloback\Model\ResourceModel\Collection</item>
+                <item name="natxo_moduloback_listing_data_source" xsi:type="string">Natxo\Moduloback\Model\ResourceModel\Content\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="Natxo\Moduloback\Model\ResourceModel\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="Natxo\Moduloback\Model\ResourceModel\Content\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">natxo_moduloback</argument>
             <argument name="resourceModel" xsi:type="string">Natxo\Moduloback\Model\ResourceModel\Content</argument>
