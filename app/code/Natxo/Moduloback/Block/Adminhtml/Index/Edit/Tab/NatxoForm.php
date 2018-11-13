@@ -8,6 +8,11 @@ class NatxoForm extends \Magento\Backend\Block\Widget\Form\Generic implements \M
     protected $_systemStore;
 
     /**
+     * @var \Magento\Cms\Model\Wysiwyg\Config
+     */
+    protected $_wysiwygConfig;
+
+    /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
@@ -18,10 +23,12 @@ class NatxoForm extends \Magento\Backend\Block\Widget\Form\Generic implements \M
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
+        \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig,
         \Magento\Store\Model\System\Store $systemStore,
         array $data = array()
     ) {
         $this->_systemStore = $systemStore;
+        $this->_wysiwygConfig = $wysiwygConfig;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -56,14 +63,16 @@ class NatxoForm extends \Magento\Backend\Block\Widget\Form\Generic implements \M
                 /*'required' => true,*/
             )
         );
+        $wysiwygConfig = $this->_wysiwygConfig->getConfig();    
         $fieldset->addField(
             'content',
-            'text',
+            'editor',
             array(
                 'name' => 'content',
                 'label' => __('Content'),
                 'title' => __('Content'),
-                'required' => true
+                'required' => true,
+                'config'    => $wysiwygConfig
             )
         );
         $fieldset->addField(
@@ -83,6 +92,17 @@ class NatxoForm extends \Magento\Backend\Block\Widget\Form\Generic implements \M
                 'name' => 'url',
                 'label' => __('Url'),
                 'title' => __('Url'),
+                'required' => true
+            )
+        );
+        $fieldset->addField(
+            'status',
+            'select',
+            array(
+                'name' => 'status',
+                'label' => __('Status'),
+                'title' => __('Status'),
+                'options' => [1 => 'Enabled', 0 => 'Disabled'],
                 'required' => true
             )
         );
