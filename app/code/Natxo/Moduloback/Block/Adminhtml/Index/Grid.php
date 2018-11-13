@@ -186,6 +186,30 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'class' => 'url'
             ]
         );
+        $this->addColumn(
+            'status',
+            [
+                'header' => __('status'),
+                'index' => 'status',
+                'class' => 'status'
+            ]
+        );
+        $this->addColumn(
+            'created_at',
+            [
+                'header' => __('created_at'),
+                'index' => 'created_at',
+                'class' => 'created_at'
+            ]
+        );
+        $this->addColumn(
+            'updated_at',
+            [
+                'header' => __('updated_at'),
+                'index' => 'updated_at',
+                'class' => 'updated_at'
+            ]
+        );
 		/*{{CedAddGridColumn}}*/
 
         $block = $this->getLayout()->getBlock('grid.bottom.links');
