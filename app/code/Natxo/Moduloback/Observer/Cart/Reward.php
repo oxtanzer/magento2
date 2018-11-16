@@ -10,9 +10,13 @@ class Reward implements ObserverInterface
 
     protected $layout;
 
-    public function __construct(\Magento\Framework\View\LayoutInterface $layout)
+    public function __construct(
+        \Magento\Framework\View\LayoutInterface $layout,
+        \Magento\Framework\Registry $registry
+        )
     {
         $this->layout = $layout;
+        $this->_registry = $registry;
     }
 
     /**
@@ -31,12 +35,8 @@ class Reward implements ObserverInterface
 
         $logger->info($quoteitem->getId().' - '.$product->getName());
 
-        $block = $this->layout->createBlock('Natxo\Moduloback\Block\Reward')
-                        ->setTemplate('Natxo_Moduloback::reward/rewardPopup.phtml')
-                        ->setResponse($product->getName())
-                        ->toHtml();
-        //$logger->info(var_dump($block));
-        return $block;
+        $this->_registry->register('reward_popup', $product);
+
 return; 
         /*
         //Como cambiar precio del producto que se acaba de añadir al carrito

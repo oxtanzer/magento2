@@ -12,11 +12,14 @@ class Reward extends Template implements BlockInterface
     // Contructor de Description (1ro)
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Registry $registry
     )
     {    
-        $this->_storeManager = $storeManager;
         parent::__construct($context);
+        $this->_storeManager = $storeManager;
+        $this->_registry = $registry;
+        $this->setData('reward_popup', $this->getRewardRegistry());
     }
 
     // Contructor de la functiones (2do)
@@ -24,5 +27,9 @@ class Reward extends Template implements BlockInterface
     {
         parent::_construct();
         //$this->setTemplate('widget/sliderimages.phtml');
-    }    
+    }
+    
+    private function getRewardRegistry() {
+        $rewardInfo = $this->_registry->registry('reward_popup');
+    }
 }
