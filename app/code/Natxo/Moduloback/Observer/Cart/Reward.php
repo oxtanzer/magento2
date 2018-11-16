@@ -8,6 +8,13 @@ use Magento\Framework\View\LayoutFactory;
 class Reward implements ObserverInterface
 {
 
+    protected $layout;
+
+    public function __construct(\Magento\Framework\View\LayoutInterface $layout)
+    {
+        $this->layout = $layout;
+    }
+
     /**
      * @param \Magento\Framework\Event\Observer $observer
      */
@@ -24,6 +31,13 @@ class Reward implements ObserverInterface
 
         $logger->info($quoteitem->getId().' - '.$product->getName());
 
+        $block = $this->layout->createBlock('Natxo\Moduloback\Block\Reward')
+                        ->setTemplate('Natxo_Moduloback::reward/rewardPopup.phtml')
+                        ->setResponse($product->getName())
+                        ->toHtml();
+        //$logger->info(var_dump($block));
+        return $block;
+return; 
         /*
         //Como cambiar precio del producto que se acaba de añadir al carrito
         
